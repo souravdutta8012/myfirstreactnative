@@ -1,16 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity, Keyboard } from 'react-native';
-import Task from './components/Task'
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import Task from './components/Task';
 
 export default function App() {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
 
+  const _storeData = async () => {
+    try {
+      await AsyncStorage.setItem(
+        '@MySuperStore:key',
+        'I like to save it.'
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('TASKS');
+      if (value !== null) {
+        console.log(value);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleAddTask = () => {
-    Keyboard.dismiss();
-    setTaskItems([...taskItems, task]);
-    setTask(null);
+    console.log(task);
+    if (task) {
+      Keyboard.dismiss();
+      setTaskItems([...taskItems, task]);
+      setTask(null);
+    }
   }
 
   const completeTask = (index) => {
