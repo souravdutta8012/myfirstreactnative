@@ -1,47 +1,79 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity, Keyboard } from 'react-native';
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 import Task from './components/Task';
 
 export default function App() {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
 
-  const _storeData = async () => {
-    try {
-      await AsyncStorage.setItem(
-        '@MySuperStore:key',
-        'I like to save it.'
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    handleFetchTask();
+  }, [])
 
-  const _retrieveData = async () => {
+  const storeData = async (value) => {
     try {
-      const value = await AsyncStorage.getItem('TASKS');
-      if (value !== null) {
-        console.log(value);
-      }
-    } catch (error) {
-      console.log(error);
+      await AsyncStorage.setItem(uuid.v4(), value);
+    } catch (e) {
+      console.log(e);
     }
-  };
+  }
+
+  const getAllKeys = async () => {
+    let keys = [];
+    try {
+      keys = await AsyncStorage.getAllKeys();
+    } catch (e) {
+      console.log(e);
+    }
+    return keys;
+  }
+
+  const getMultiple = async (keys) => {
+    let values;
+    try {
+      values = await AsyncStorage.multiGet(keys);
+      return values;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const removeValue = async (key) => {
+    try {
+      await AsyncStorage.removeItem(key);
+      console.log('Done.');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleFetchTask = async () => {
+    let init = [];
+    setTaskItems(init);
+    let keys = await getAllKeys();
+    let values = await getMultiple(keys);
+    console.log(values);
+    values.forEach(value => {
+      init.push(value);
+    });
+    setTaskItems(init);
+  }
 
   const handleAddTask = () => {
     if (task) {
       Keyboard.dismiss();
-      setTaskItems([...taskItems, task]);
+      storeData(task);
       setTask(null);
+      handleFetchTask();
     }
   }
 
   const completeTask = (index) => {
-    let itemsCopy = [...taskItems];
-    itemsCopy.splice(index, 1);
-    setTaskItems(itemsCopy);
+    removeValue(taskItems[index][0]);
+    handleFetchTask();
   }
 
   return (
