@@ -31,7 +31,6 @@ export default function App() {
   };
 
   const handleAddTask = () => {
-    console.log(task);
     if (task) {
       Keyboard.dismiss();
       setTaskItems([...taskItems, task]);
