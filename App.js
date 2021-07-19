@@ -44,7 +44,7 @@ export default function App() {
   const removeValue = async (key) => {
     try {
       await AsyncStorage.removeItem(key);
-      console.log('Done.');
+      console.log('Deleted');
     } catch (e) {
       console.log(e);
     }
@@ -55,7 +55,6 @@ export default function App() {
     setTaskItems(init);
     let keys = await getAllKeys();
     let values = await getMultiple(keys);
-    console.log(values);
     values.forEach(value => {
       init.push(value);
     });
