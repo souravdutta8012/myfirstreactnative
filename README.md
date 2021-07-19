@@ -14,4 +14,4 @@
 * go to browser login to your expo account and get the .apk file
 
 ### Dev:-
-**Sourav Dutta**
+* Sourav Dutta
