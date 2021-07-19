@@ -52,7 +52,6 @@ export default function App() {
 
   const handleFetchTask = async () => {
     let init = [];
-    setTaskItems(init);
     let keys = await getAllKeys();
     let values = await getMultiple(keys);
     values.forEach(value => {
