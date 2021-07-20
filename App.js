@@ -37,8 +37,8 @@ export default function App() {
     }
   }
 
-  const completeTask = (index) => {
-    removeValue(taskItems[index].id);
+  const completeTask = (id) => {
+    removeValue(id);
     handleFetchTask();
   }
 
@@ -52,9 +52,7 @@ export default function App() {
           {
             taskItems.map((item, index) => {
               return (
-                <TouchableOpacity key={index} onPress={() => completeTask(index)}>
-                  <Task text={item} />
-                </TouchableOpacity>
+                <Task key={index} text={item} parentCompleteTask={(id) => completeTask(id)} />
               )
             })
           }

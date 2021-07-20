@@ -1,7 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const Task = (props) => {
+    const completeTrigger = (id) => {
+        props.parentCompleteTask(id);
+    }
+
     return (
         <View style={styles.item}>
             <View style={styles.itemLeft}>
@@ -10,11 +14,11 @@ const Task = (props) => {
                 <Text style={styles.itemText}>
                     {props.text.taskName}
                 </Text>
-                <View style={styles.addWrapper}>
+                <TouchableOpacity style={styles.addWrapper} onPress={() => completeTrigger(props.text.id)}>
                     <Text style={styles.addText}>
                         X
                     </Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     )
