@@ -3,7 +3,8 @@ import uuid from 'react-native-uuid';
 
 export const storeData = async (value) => {
     try {
-        await AsyncStorage.setItem(uuid.v4(), value);
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem(value.id, jsonValue);
         console.log('Added data');
     } catch (e) {
         console.log(e);
@@ -36,6 +37,15 @@ export const removeValue = async (key) => {
     try {
         await AsyncStorage.removeItem(key);
         console.log('Deleted data');
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const clearAll = async () => {
+    try {
+        await AsyncStorage.clear();
+        console.log('Deleted all data')
     } catch (e) {
         console.log(e);
     }

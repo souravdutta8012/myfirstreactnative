@@ -19,7 +19,7 @@ export default function App() {
     let keys = await getAllKeys();
     let values = await getMultiple(keys);
     values.forEach(value => {
-      init.push(value);
+      init.push(JSON.parse(value[1]));
     });
     setTaskItems(init);
   }
@@ -27,14 +27,20 @@ export default function App() {
   const handleAddTask = () => {
     if (task) {
       Keyboard.dismiss();
-      storeData(task);
+      const d = new Date();
+      let jsonData = {
+        id: uuid.v4(),
+        taskName: task,
+        time: `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`,
+      }
+      storeData(jsonData);
       setTask(null);
       handleFetchTask();
     }
   }
 
   const completeTask = (index) => {
-    removeValue(taskItems[index][0]);
+    removeValue(taskItems[index].id);
     handleFetchTask();
   }
 
