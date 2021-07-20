@@ -112,6 +112,15 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
     borderWidth: 0.5,
     width: 300,
+    // shadow style
+    shadowColor: 'blue',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 5,
   },
   addWrapper: {
     width: 50,
@@ -122,5 +131,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: 'blue',
     borderWidth: 0.5,
+    // shadow style
+    shadowColor: 'blue',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 5,
   },
 });
