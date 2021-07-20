@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const Task = (props) => {
     const completeTrigger = (id) => {
@@ -14,9 +16,11 @@ const Task = (props) => {
                 <Text style={styles.itemText}>
                     {props.text.taskName}
                 </Text>
-                <TouchableOpacity style={styles.addWrapper} onPress={() => completeTrigger(props.text.id)}>
-                    <Text style={styles.addText}>
-                        X
+                <TouchableOpacity style={styles.completeWrapper} onPress={() => completeTrigger(props.text.id)}>
+                    <Text>
+                        <View>
+                            <FontAwesomeIcon icon={faCheck} color="green" />
+                        </View>
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -32,6 +36,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        borderColor: 'blue',
+        borderWidth: 0.5,
         marginBottom: 20,
     },
     itemLeft: {
@@ -49,25 +55,17 @@ const styles = StyleSheet.create({
     },
     itemText: {
         minWidth: '80%',
+        maxWidth: '80%',
     },
-    circular: {
-        width: 12,
-        height: 12,
-        borderColor: '#55BCF6',
-        borderWidth: 2,
-        borderRadius: 5,
-    },
-    addWrapper: {
-        width: 24,
-        height: 24,
+    completeWrapper: {
+        width: 30,
+        height: 30,
         backgroundColor: '#FFF',
         borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#C0C0C0',
-        borderWidth: 1,
-    },
-    addText: {
+        borderColor: 'green',
+        borderWidth: 1.5,
     },
 });
 

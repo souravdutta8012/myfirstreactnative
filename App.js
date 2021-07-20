@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import uuid from 'react-native-uuid';
-import Task from './components/Task';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { storeData, getAllKeys, getMultiple, removeValue } from './util/async-storage'
+import Task from './components/Task';
 
 export default function App() {
   const [task, setTask] = useState();
@@ -66,8 +68,10 @@ export default function App() {
           onChangeText={text => setTask(text)} />
         <TouchableOpacity onPress={() => handleAddTask()}>
           <View style={styles.addWrapper}>
-            <Text style={styles.addText}>
-              +
+            <Text>
+              <View>
+                <FontAwesomeIcon icon={faPlus} size={20} color="blue" />
+              </View>
             </Text>
           </View>
         </TouchableOpacity>
@@ -105,8 +109,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#FFF',
     borderRadius: 60,
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
+    borderColor: 'blue',
+    borderWidth: 0.5,
     width: 300,
   },
   addWrapper: {
@@ -116,9 +120,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
-  },
-  addText: {
+    borderColor: 'blue',
+    borderWidth: 0.5,
   },
 });
