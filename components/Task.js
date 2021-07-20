@@ -10,7 +10,10 @@ const Task = (props) => {
                 <Text style={styles.itemText}>
                     {props.text.taskName}
                 </Text>
-                <View style={styles.circular}>
+                <View style={styles.addWrapper}>
+                    <Text style={styles.addText}>
+                        X
+                    </Text>
                 </View>
             </View>
         </View>
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
         marginRight: 15,
     },
     itemText: {
-        minWidth: '85%',
+        minWidth: '80%',
     },
     circular: {
         width: 12,
@@ -50,8 +53,17 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 5,
     },
-    writeTaskWrapper: {
-
+    addWrapper: {
+        width: 24,
+        height: 24,
+        backgroundColor: '#FFF',
+        borderRadius: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+    },
+    addText: {
     },
 });
 
