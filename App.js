@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
 import uuid from 'react-native-uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -50,15 +50,17 @@ export default function App() {
         <Text style={styles.sectionTitle}>
           Today's tasks
         </Text>
-        <View style={styles.items}>
-          {
-            taskItems.map((item, index) => {
-              return (
-                <Task key={index} text={item} parentCompleteTask={(id) => completeTask(id)} />
-              )
-            })
-          }
-        </View>
+        <ScrollView>
+          <View style={styles.items}>
+            {
+              taskItems.map((item, index) => {
+                return (
+                  <Task key={index} text={item} parentCompleteTask={(id) => completeTask(id)} />
+                )
+              })
+            }
+          </View>
+        </ScrollView>
       </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
   },
   writeTaskWrapper: {
     position: 'absolute',
+    zIndex: 1,
     bottom: 40,
     width: '100%',
     flexDirection: 'row',

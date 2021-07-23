@@ -9,26 +9,53 @@ const Task = (props) => {
     }
 
     return (
-        <View style={styles.item}>
-            <View style={styles.itemLeft}>
-                <View style={styles.square}>
+        <View style={styles.task}>
+            <View style={styles.date}>
+                <View style={styles.circle}>
                 </View>
-                <Text style={styles.itemText}>
-                    {props.text.taskName}
-                </Text>
-                <TouchableOpacity style={styles.completeWrapper} onPress={() => completeTrigger(props.text.id)}>
+                <View>
                     <Text>
-                        <View>
-                            <FontAwesomeIcon icon={faCheck} color="green" />
-                        </View>
+                        {props.text.time}
                     </Text>
-                </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.item}>
+                <View style={styles.itemLeft}>
+                    <View style={styles.square}>
+                    </View>
+                    <Text style={styles.itemText}>
+                        {props.text.taskName}
+                    </Text>
+                    <TouchableOpacity style={styles.completeWrapper} onPress={() => completeTrigger(props.text.id)}>
+                        <Text>
+                            <View>
+                                <FontAwesomeIcon icon={faCheck} color="green" />
+                            </View>
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    task: {
+        zIndex: -1,
+    },
+    date: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        marginBottom: 5,
+    },
+    circle: {
+        width: 15,
+        height: 15,
+        backgroundColor: '#55BCF6',
+        borderRadius: 50,
+        marginRight: 10,
+    },
     item: {
         backgroundColor: '#FFF',
         padding: 15,
