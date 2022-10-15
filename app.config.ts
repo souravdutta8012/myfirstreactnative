@@ -4,7 +4,7 @@ import { ExpoConfig } from '@expo/config-types';
 // import { ExpoConfig } from 'expo/config';
 
 const config: ExpoConfig = {
-    name: 'my-app',
+    name: 'myfirstreactnative',
     slug: ''
 };
 
