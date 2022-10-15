@@ -5,7 +5,7 @@ import { ExpoConfig } from '@expo/config-types';
 
 const config: ExpoConfig = {
     name: 'myfirstreactnative',
-    slug: ''
+    slug: 'myfirstreactnative'
 };
 
 export default config;
